@@ -1,7 +1,5 @@
 'use strict';
 
-import { IMAGES } from './images.js';
-
 export class NavBar {
     constructor(selector) {
         this.root = document.querySelector(selector);
@@ -10,9 +8,24 @@ export class NavBar {
     start() {
         this.root.innerHTML = `<ul></ul>`;
 
-        const navList = this.root.children[0];
-        navList.innerHTML = IMAGES.reduce((allHtml, path) => allHtml+`<li><a><img src="img/${path}"></a></li>`, '')
-    
+        fetch('./scripts/images.json', {
+            method: 'GET'
+        }).then(response => {
+            if (response.status == 200) {
+                return response.json();
+            }
+            throw 'Problème';
+        })
+        .then(pathList => {
+            this.render(pathList)
+        })
+    }
+
+    render(pathList) {
+        this.root.children[0].innerHTML = pathList.reduce(
+            (allHtml, path) => allHtml+`<li><a><img src="img/${path}"></a></li>`
+        , '');
+
         const navLinks = this.root.querySelectorAll('a');
         for (const link of navLinks) {
             link.addEventListener('click', function() {
