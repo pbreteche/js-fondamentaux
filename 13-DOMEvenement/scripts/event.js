@@ -14,4 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     converterInput.addEventListener('input', function() {
         this.nextElementSibling.textContent = numberFormat.format(this.value / 1.609);
     });
+
+    converterInput.addEventListener('mouseover', function(event) {
+        if (this != event.target) {
+            return;
+        }
+    });
 });
