@@ -4,7 +4,20 @@ import { IMAGES } from './images.js';
 
 export class Gallery {
 
+    constructor(selector) {
+        this.root = document.querySelector(selector);
+    }
+
     start() {
+
+        this.root.innerHTML = `
+        <article>
+            <img src="" height="320">
+        </article>
+        <nav>
+            <ul></ul>
+        </nav>`;
+
         const navBar = document.querySelector('nav');
         const bigImage = document.querySelector('article > img');
     
