@@ -1,0 +1,1 @@
+console.log("fichier2: ",  multiplication(2,5));
