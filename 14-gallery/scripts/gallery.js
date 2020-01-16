@@ -1,34 +1,25 @@
 'use strict';
 
-import { IMAGES } from './images.js';
+import { NavBar } from './nav-bar.js';
 
 export class Gallery {
-
     constructor(selector) {
         this.root = document.querySelector(selector);
     }
 
     start() {
-
         this.root.innerHTML = `
         <article>
             <img src="" height="320">
         </article>
-        <nav>
-            <ul></ul>
-        </nav>`;
+        <nav id="nav-bar-component"></nav>`;
 
-        const navBar = document.querySelector('nav');
-        const bigImage = document.querySelector('article > img');
-    
-        const navList = navBar.children[0];
-        navList.innerHTML = IMAGES.reduce((allHtml, path) => allHtml+`<li><a><img src="img/${path}"></a></li>`, '')
-    
-        const navLinks = navBar.querySelectorAll('a');
-        for (const link of navLinks) {
-            link.addEventListener('click', function() {
-                bigImage.src = this.children[0].src;
-            });
-        }
+        const bigImage = this.root.querySelector('article > img', );
+
+        const navBar = new NavBar('#nav-bar-component');
+        navBar.start();
+        this.root.querySelector('#nav-bar-component').addEventListener('pictureSelected', function(event) {
+            bigImage.src = event.detail.path
+        })
     }
 }
