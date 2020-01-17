@@ -28,13 +28,22 @@ export class NavBar {
 
         const navLinks = this.root.querySelectorAll('a');
         for (const link of navLinks) {
-            link.addEventListener('click', function() {
-                const pictureSelectedEvent = new CustomEvent('pictureSelected', {
-                    bubbles: true,
-                    detail: { path: this.children[0].src }
-                });
-                this.dispatchEvent(pictureSelectedEvent);
-            });
+            link.addEventListener('click', selectHandler);
         }
     }
+
+    addPicture(src) {
+        const newItem = document.createElement('li');
+        newItem.innerHTML = `<a><img src="${src}"></a>`
+        this.root.children[0].append(newItem);
+        newItem.children[0].addEventListener('click', selectHandler);
+    }
+}
+
+function selectHandler() {
+    const pictureSelectedEvent = new CustomEvent('pictureSelected', {
+        bubbles: true,
+        detail: { path: this.children[0].src }
+    });
+    this.dispatchEvent(pictureSelectedEvent);
 }

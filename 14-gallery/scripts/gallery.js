@@ -26,5 +26,8 @@ export class Gallery {
 
         const addForm = new AddForm('#add-form-component');
         addForm.start();
+        this.root.querySelector('#add-form-component').addEventListener('pictureCreated', function(event) {
+            navBar.addPicture(event.detail.src);
+        });
     }
 }
