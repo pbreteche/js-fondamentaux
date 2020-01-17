@@ -31,7 +31,7 @@ export class AddForm {
 
 
             reader.readAsDataURL(newFile);
-            this.classList.toggle('hidden');
+            this.classList.add('hidden');
         });
     }
 }
